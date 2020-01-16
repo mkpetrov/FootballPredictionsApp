@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,6 +25,12 @@ namespace TestWebApp.Controllers
         private void GenerateDataSource()
         {
             footballMatches = new List<MainGridModel>();
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("api-football-v1.p.rapidapi.com", "9f7070847amsh17101106c788debp1cb536jsnd43cf341d933");
+                var res = client.GetAsync("https://api-football-v1.p.rapidapi.com/v2/predictions/157462").Result;
+            }
         }
 
         public IActionResult Index()
