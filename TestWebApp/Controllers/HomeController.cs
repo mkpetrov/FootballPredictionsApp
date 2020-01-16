@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TestWebApp.Models;
 
 namespace TestWebApp.Controllers
@@ -28,8 +27,12 @@ namespace TestWebApp.Controllers
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("api-football-v1.p.rapidapi.com", "9f7070847amsh17101106c788debp1cb536jsnd43cf341d933");
-                var res = client.GetAsync("https://api-football-v1.p.rapidapi.com/v2/predictions/157462").Result;
+                client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "9f7070847amsh17101106c788debp1cb536jsnd43cf341d933");
+                var result = client.GetAsync(new Uri( "https://api-football-v1.p.rapidapi.com/v2/predictions/157462")).Result;
+                var content = result.Content.ReadAsStringAsync();
+                var parsedObject = JObject.Parse(content.Result);
+                var parsedObjectTostring = parsedObject["api"]["predictions"].ToString();
+                var predictions = JsonConvert.DeserializeObject<List<Prediction>>(parsedObjectTostring);
             }
         }
 
