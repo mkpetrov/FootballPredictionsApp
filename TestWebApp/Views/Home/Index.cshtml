@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MainGridModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <button type ="button" >МАЧОВЕ</button>
+</div>
+<table class="table table-bordered table-responsive table-hover" style="margin-top: 20px">
+    <tr>
+        <th width="398" align="center">МАЧ</th>
+        <th>ШАНС ЗА ПОБЕДА НА ДОМАКИНА</th>
+        <th>ШАНС ЗА РАВЕН</th>
+        <th>ШАНС ЗА ПОБЕДА НА ГОСТА</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FootballMatch</td>
+            <td>@item.HomeWinningPercent</td>
+            <td>@item.DrawWinningPercent</td>
+            <td>@item.AwayWinningPercent</td>
+        </tr>
+    }
+</table>
