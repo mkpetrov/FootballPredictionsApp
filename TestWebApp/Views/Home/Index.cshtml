@@ -7,22 +7,37 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <button type ="button" onclick="location.href='<@Url.Action("GetEnglishMatches", "HomeController") %>'" >МАЧОВЕ</button>
+    <button id="buttonToBeClicked" type="button" onclick="location.href='@Url.Action("GetEnglishMatches", "Home")'">МАЧОВЕ</button>
 </div>
 <table class="table table-bordered table-responsive table-hover" style="margin-top: 20px">
     <tr>
-        <th width="398">МАЧ</th>
+        <th>МАЧ</th>
         <th>ШАНС ЗА ПОБЕДА НА ДОМАКИНА</th>
         <th>ШАНС ЗА РАВЕН</th>
         <th>ШАНС ЗА ПОБЕДА НА ГОСТА</th>
+        <th>ПРЕДПОЛОЖЕНИЕ ЗА ПОБЕДИТЕЛ В МАЧА</th>
+        <th>СЪВЕТ</th>
     </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.FootballMatch</td>
-            <td>@item.HomeWinningPercent</td>
-            <td>@item.DrawWinningPercent</td>
-            <td>@item.AwayWinningPercent</td>
-        </tr>
+    @{
+        if (Model == null)
+        {
+            <tr style="text-align: center">
+                Няма данни
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FootballMatch</td>
+                    <td>@item.HomeWinningPercent</td>
+                    <td>@item.DrawWinningPercent</td>
+                    <td>@item.AwayWinningPercent</td>
+                    <td>@item.MatchWinner</td>
+                    <td>@item.Advice</td>
+                </tr>
+            }
+        }
     }
 </table>

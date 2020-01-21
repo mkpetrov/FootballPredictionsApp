@@ -14,6 +14,7 @@ namespace TestWebApp.Models
         [JsonProperty("advice")]
         public string Advice { get; set; }
 
+        [JsonProperty("winning_percent")]
         public WinningPercent WinningPercent { get; set; }
     }
 }
