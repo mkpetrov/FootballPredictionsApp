@@ -17,6 +17,7 @@
         <th>ШАНС ЗА ПОБЕДА НА ГОСТА</th>
         <th>ПРЕДПОЛОЖЕНИЕ ЗА ПОБЕДИТЕЛ В МАЧА</th>
         <th>СЪВЕТ</th>
+        <th>ДАТА</th>
     </tr>
     @{
         if (Model == null)
@@ -36,6 +37,7 @@
                     <td>@item.AwayWinningPercent</td>
                     <td>@item.MatchWinner</td>
                     <td>@item.Advice</td>
+                    <td>@item.FixtureDate</td>
                 </tr>
             }
         }
